@@ -1,0 +1,21 @@
+{
+	"title": "bridge Ontology",
+	"id": "ont_bridge",
+	"concepts": [
+		{"qid": "Q1", "label": "构件编号"},
+		{"qid": "Q2", "label": "构件"},
+		{"qid": "Q3", "label": "构件部位"},
+		{"qid": "Q4", "label": "病害位置"},
+		{"qid": "Q5", "label": "病害"},
+		{"qid": "Q6", "label": "病害性状描述类别"},
+		{"qid": "Q7", "label": "病害性状数值"}
+	],
+	"relations": [
+		{"pid": "P10", "label": "构件位置是", "domain": "Q2", "range": "Q1"},
+		{"pid": "P11", "label": "具体部位是", "domain": "Q1", "range": "Q3"},
+		{"pid": "P12", "label": "病害具体位置是", "domain": "Q3", "range": "Q4"},
+		{"pid": "P13", "label": "存在病害是", "domain": "Q4", "range": "Q5"},
+		{"pid": "P14", "label": "病害性状类别是", "domain": "Q5", "range": "Q6"},
+		{"pid": "P15", "label": "性状数值是", "domain": "Q6", "range": "Q7"}
+	]
+}

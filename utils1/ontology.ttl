@@ -1,0 +1,106 @@
+@prefix : <http://example.org/bridge-defect-ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Ontology Information
+<http://example.org/bridge-defect-ontology> a owl:Ontology ;
+    rdfs:label "桥梁病害本体（含路径变化）"@zh ;
+    rdfs:comment "一个描述桥梁构件、病害及其相关信息的本体，考虑了连接路径的变化和特定约束。"@zh .
+
+# --- Classes (实体) ---
+
+:构件 a rdfs:Class ;
+    rdfs:label "构件"@zh .
+    # Applying Constraint (2) using OWL:
+    # A :构件 cannot have BOTH :构件位置是 AND :存在病害是.
+    # This is expressed by saying that the class of (:构件 AND has :构件位置是)
+    # is disjoint with the class of (:构件 AND has :存在病害是).
+    # This is a complex axiom and might be better handled by SHACL depending on exact needs.
+    # For schema, this is how it would be expressed if strictly enforced:
+    # Note: This definition is part of the :构件 class implicitly through the disjointness axiom below,
+    # or can be explicitly stated using rdfs:subClassOf complex anonymous classes.
+    # For clarity, the disjointness axiom is stated globally later.
+
+:构件编号 a rdfs:Class ;
+    rdfs:label "构件编号"@zh .
+
+:构件部位 a rdfs:Class ;
+    rdfs:label "构件部位"@zh .
+
+:病害位置 a rdfs:Class ;
+    rdfs:label "病害位置"@zh .
+
+:病害 a rdfs:Class ;
+    rdfs:label "病害"@zh .
+
+# Classes for defect attributes (Constraint 3: not in linking paths)
+:病害数量 a rdfs:Class ;
+    rdfs:label "病害数量"@zh .
+
+:病害性状描述类别 a rdfs:Class ;
+    rdfs:label "病害性状描述类别"@zh .
+
+:病害性状数值 a rdfs:Class ;
+    rdfs:label "病害性状数值"@zh .
+
+:病害性状 a rdfs:Class ;
+    rdfs:label "病害性状"@zh .
+
+# --- Object Properties (关系) ---
+
+:构件位置是 a rdf:Property ; # R1
+    rdfs:label "构件位置是"@zh ;
+    rdfs:domain :构件 ;
+    rdfs:range :构件编号 .
+
+:具体部位是 a rdf:Property ; # R2
+    rdfs:label "具体部位是"@zh ;
+    rdfs:domain [ rdf:type owl:Class ; owl:unionOf ( :构件 :构件编号 ) ] ;
+    rdfs:range :构件部位 .
+
+:病害具体位置是 a rdf:Property ; # R3
+    rdfs:label "病害具体位置是"@zh ;
+    rdfs:domain [ rdf:type owl:Class ; owl:unionOf ( :构件 :构件编号 :构件部位 ) ] ;
+    rdfs:range :病害位置 .
+
+:存在病害是 a rdf:Property ; # R4
+    rdfs:label "存在病害是"@zh ;
+    rdfs:domain [ rdf:type owl:Class ; owl:unionOf ( :构件 :构件编号 :构件部位 :病害位置 ) ] ;
+    rdfs:range :病害 .
+
+# --- Properties for 病害 attributes (from previous model, consistent with Constraint 3) ---
+
+:具有描述类别 a rdf:Property ;
+    rdfs:label "具有描述类别"@zh ;
+    rdfs:domain :病害 ;
+    rdfs:range :病害性状描述类别 .
+
+:具有数值 a rdf:Property ;
+    rdfs:label "具有数值"@zh ;
+    rdfs:domain :病害性状描述类别 ;
+    rdfs:range :病害性状数值 .
+
+# --- Axiom for Constraint (2) ---
+# States that the class of (:构件 that :构件位置是 some :构件编号)
+# is disjoint with the class of (:构件 that :存在病害是 some :病害).
+[ rdf:type owl:Class ;
+  owl:intersectionOf (
+    :构件
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :构件位置是 ;
+      owl:someValuesFrom :构件编号 # Ensures the property actually leads somewhere
+    ]
+  )
+]
+owl:disjointWith
+[ rdf:type owl:Class ;
+  owl:intersectionOf (
+    :构件
+    [ rdf:type owl:Restriction ;
+      owl:onProperty :存在病害是 ;
+      owl:someValuesFrom :病害 # Ensures the property actually leads somewhere
+    ]
+  )
+] .

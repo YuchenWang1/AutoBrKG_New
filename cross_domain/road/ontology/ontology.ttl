@@ -1,0 +1,79 @@
+###############################################################################
+# road-defect-ontology.ttl
+# 道路病害本体（7 个实体，6 个关系，含必要约束）
+###############################################################################
+@prefix :      <http://example.org/bridge-defect-ontology#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/bridge-defect-ontology> a owl:Ontology ;
+    rdfs:label  "道路病害本体"@zh ;
+    rdfs:comment "描述路面类型、桩号、检查指标、病害及其属性的本体。"@zh .
+
+###############################
+# ---- 实体（Classes） ----
+###############################
+:路面类型            a rdfs:Class ; rdfs:label "路面类型"@zh .
+:桩号               a rdfs:Class ; rdfs:label "桩号"@zh .
+:检查指标            a rdfs:Class ; rdfs:label "检查指标"@zh .
+:检查指标值          a rdfs:Class ; rdfs:label "检查指标值"@zh .
+:病害               a rdfs:Class ; rdfs:label "病害"@zh .
+:病害性状描述类别     a rdfs:Class ; rdfs:label "病害性状描述类别"@zh .
+:病害性状数值        a rdfs:Class ; rdfs:label "病害性状数值"@zh .
+
+###############################
+# ---- 关系（Properties） ----
+###############################
+:道路位置是  a rdf:Property ;
+    rdfs:label  "道路位置是"@zh ;
+    rdfs:domain :路面类型 ;
+    rdfs:range  :桩号 .
+
+:检查指标是 a rdf:Property ;
+    rdfs:label  "检查指标是"@zh ;
+    rdfs:domain :桩号 ;
+    rdfs:range  :检查指标 .
+
+:检查指标值是 a rdf:Property ;
+    rdfs:label  "检查指标值是"@zh ;
+    rdfs:domain :检查指标 ;
+    rdfs:range  :检查指标值 .
+
+:存在病害是 a rdf:Property ;
+    rdfs:label  "存在病害是"@zh ;
+    rdfs:domain :桩号 ;
+    rdfs:range  :病害 .
+
+:性状描述类别是 a rdf:Property ;
+    rdfs:label  "性状描述类别是"@zh ;
+    rdfs:domain :病害 ;
+    rdfs:range  :病害性状描述类别 .
+
+:性状数值是 a rdf:Property ;
+    rdfs:label  "性状数值是"@zh ;
+    rdfs:domain :病害性状描述类别 ;
+    rdfs:range  :病害性状数值 .
+
+########################################
+# ---- 语义约束（必要存在性约束） ----
+########################################
+# 1. 病害性状描述类别 必须至少有一个 数值
+:病害性状描述类别
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty :性状数值是 ;
+        owl:someValuesFrom :病害性状数值
+    ] .
+
+# 2. 检查指标 必须至少有一个 检查指标值
+:检查指标
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty :检查指标值是 ;
+        owl:someValuesFrom :检查指标值
+    ] .
+
+# 本体文件结束
+###############################################################################

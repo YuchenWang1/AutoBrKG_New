@@ -1,0 +1,15 @@
+Evaluation results for example:
+Entity: 构件, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+Entity: 构件编号, Precision: 0.8947, Recall: 1.0000, F1: 0.9444
+Entity: 病害位置, Precision: 0.9722, Recall: 0.9722, F1: 0.9722
+Entity: 病害, Precision: 1.0000, Recall: 1.0000, F1: 1.0000
+Entity: 病害性状描述类别, Precision: 0.8750, Recall: 1.0000, F1: 0.9333
+Entity: 病害性状数值, Precision: 0.9792, Recall: 1.0000, F1: 0.9895
+Entity: 构件部位, Precision: 0.7333, Recall: 0.7857, F1: 0.7586
+Relation: 构件位置是, Precision: 0.8696, Recall: 0.9524, F1: 0.9091
+Relation: 病害具体位置是, Precision: 0.6905, Recall: 0.6905, F1: 0.6905
+Relation: 存在病害是, Precision: 0.9574, Recall: 0.9574, F1: 0.9574
+Relation: 病害性状描述类别是, Precision: 0.9524, Recall: 1.0000, F1: 0.9756
+Relation: 性状数值是, Precision: 0.9818, Recall: 1.0000, F1: 0.9908
+Relation: 具体部位是, Precision: 0.6500, Recall: 0.7647, F1: 0.7027
+

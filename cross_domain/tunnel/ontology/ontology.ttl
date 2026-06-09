@@ -1,0 +1,89 @@
+##################################################################
+#  tunnel_defect_ontology.ttl   ——  隧道病害本体（2025-06-10）
+##################################################################
+@prefix :      <http://example.org/tunnel-defect-ontology#> .
+@prefix inst:  <http://example.org/instance/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+##################################################################
+#  基本信息
+##################################################################
+<http://example.org/tunnel-defect-ontology>
+        a               owl:Ontology ;
+        rdfs:label      "隧道病害本体"@zh ;
+        rdfs:comment    "描述隧道构件、病害以及检测流程的本体。"@zh .
+
+##################################################################
+#  类（8）
+##################################################################
+:构件                a rdfs:Class ; rdfs:label "构件"@zh .
+:构件部位            a rdfs:Class ; rdfs:label "构件部位"@zh .
+:里程                a rdfs:Class ; rdfs:label "里程"@zh .
+:检测方法            a rdfs:Class ; rdfs:label "检测方法"@zh .
+:检测部位            a rdfs:Class ; rdfs:label "检测部位"@zh .
+:病害                a rdfs:Class ; rdfs:label "病害"@zh .
+:病害性状描述类别    a rdfs:Class ; rdfs:label "病害性状描述类别"@zh .
+:病害性状数值        a rdfs:Class ; rdfs:label "病害性状数值"@zh .
+
+##################################################################
+#  关系（7）
+##################################################################
+# R1  构件 ——> 构件部位
+:构件部位是          a rdf:Property ;
+        rdfs:label  "构件部位是"@zh ;
+        rdfs:domain :构件 ;
+        rdfs:range  :构件部位 .
+
+# R2  构件部位 ——> 里程
+:病害位置是          a rdf:Property ;
+        rdfs:label  "病害位置是"@zh ;
+        rdfs:domain :构件部位 ;
+        rdfs:range  :里程 .
+
+# R3  里程 ——> 检测方法
+:检测方法是          a rdf:Property ;
+        rdfs:label  "检测方法是"@zh ;
+        rdfs:domain :里程 ;
+        rdfs:range  :检测方法 .
+
+# R4  里程 ——> 检测部位
+:检测部位是          a rdf:Property ;
+        rdfs:label  "检测部位是"@zh ;
+        rdfs:domain :里程 ;
+        rdfs:range  :检测部位 .
+
+# R5  里程 ——> 病害
+:存在病害是          a rdf:Property ;
+        rdfs:label  "存在病害是"@zh ;
+        rdfs:domain :里程 ;
+        rdfs:range  :病害 .
+
+# R6  病害 ——> 病害性状描述类别
+:性状描述类别是      a rdf:Property ;
+        rdfs:label  "性状描述类别是"@zh ;
+        rdfs:domain :病害 ;
+        rdfs:range  :病害性状描述类别 .
+
+# R7  病害性状描述类别 ——> 病害性状数值
+:性状数值是          a rdf:Property ;
+        rdfs:label  "性状数值是"@zh ;
+        rdfs:domain :病害性状描述类别 ;
+        rdfs:range  :病害性状数值 .
+
+##################################################################
+#  业务约束（OWL 可表达的部分）
+##################################################################
+# 规则 A：每个“病害性状描述类别”必须至少拥有一个“病害性状数值”
+:病害性状描述类别
+        rdfs:subClassOf [
+            a               owl:Restriction ;
+            owl:onProperty  :性状数值是 ;
+            owl:someValuesFrom :病害性状数值
+        ] .
+
+# 如需更复杂的 SHACL 约束（里程可同时连三类实体等），
+# 建议在外部 SHACL 文件中编写；OWL 本体保持基本结构即可。
+##################################################################

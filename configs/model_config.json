@@ -1,0 +1,31 @@
+[
+  {
+    "config_name": "deepseek_chat",
+    "model_type": "chat",
+    "provider": "deepseek",
+    "model_name": "deepseek-chat",
+    "api_key": "${DEEPSEEK_API_KEY}",
+    "base_url": "https://api.deepseek.com/v1"
+  },
+  {
+    "config_name": "zhipuai",
+    "model_type": "zhipuai_chat",
+    "provider": "zhipuai",
+    "model_name": "glm-4-flash",
+    "api_key": "${ZHIPUAI_API_KEY}"
+  },
+  {
+    "config_name": "zhipuai_emb_config",
+    "provider": "zhipuai",
+    "model_type": "zhipuai_embedding",
+    "model_name": "embedding-3",
+    "api_key": "${ZHIPUAI_API_KEY}"
+  },
+  {
+    "config_name": "neo4j_config",
+    "provider": "neo4j",
+    "uri": "${NEO4J_URI}",
+    "username": "${NEO4J_USERNAME}",
+    "password": "${NEO4J_PASSWORD}"
+  }
+]

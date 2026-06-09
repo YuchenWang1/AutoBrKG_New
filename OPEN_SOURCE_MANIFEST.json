@@ -1,0 +1,10 @@
+{
+  "project": "AutoBrKG open-source release package",
+  "max_iterations": 3,
+  "L_update_policy": "Only Validator score >= 1.0 can update L; lower-scored outputs go to manual review and are excluded from the final graph.",
+  "memory_module_name": "memory retrieval model",
+  "cross_domain_materials": "cross_domain/",
+  "baseline_materials": "baselines/",
+  "sample_seed": 20260609,
+  "sample_size_per_domain": 50
+}

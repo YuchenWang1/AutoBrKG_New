@@ -1,0 +1,24 @@
+@prefix inst: <http://example.org/instance/> .
+@prefix ont: <http://example.org/bridge-defect-ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+inst:3m a ont:病害性状数值 ;
+    rdfs:label "3m"@zh .
+
+inst:R1_sharp_ a ont:构件编号 ;
+    rdfs:label "R1#"@zh ;
+    ont:具体部位是 inst:伸缩缝 .
+
+inst:伸缩缝 a ont:构件 ;
+    rdfs:label "伸缩缝"@zh ;
+    ont:存在病害是 inst:橡胶条堵塞 ;
+    ont:构件位置是 inst:R1_sharp_ .
+
+inst:橡胶条堵塞 a ont:病害 ;
+    rdfs:label "橡胶条堵塞"@zh ;
+    ont:具有描述类别 inst:长度 .
+
+inst:长度 a ont:病害性状描述类别 ;
+    rdfs:label "长度"@zh ;
+    ont:具有数值 inst:3m .
+

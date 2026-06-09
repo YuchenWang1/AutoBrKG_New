@@ -1,0 +1,41 @@
+{
+  "direct_llm_baselines": [
+    {
+      "display_name": "Gemini 2.5 Pro Preview 05-06",
+      "model_id": "gemini-2.5-pro-preview-05-06",
+      "prompt": "prompts/llm_bridge_kg_extraction_prompt.md"
+    },
+    {
+      "display_name": "Qwen 3.6 Plus Preview",
+      "model_id": "qwen-3.6-plus-preview",
+      "prompt": "prompts/llm_bridge_kg_extraction_prompt.md"
+    },
+    {
+      "display_name": "DeepSeek V3",
+      "model_id": "deepseek-v3",
+      "prompt": "prompts/llm_bridge_kg_extraction_prompt.md"
+    },
+    {
+      "display_name": "Llama-3.2-3B-Instruct",
+      "model_id": "llama-3.2-3b-instruct",
+      "prompt": "prompts/llm_bridge_kg_extraction_prompt.md"
+    }
+  ],
+  "framework_baselines": [
+    {
+      "name": "LightRAG",
+      "source": "https://github.com/HKUDS/LightRAG",
+      "local_note": "Use the official repository; this open-source package stores only experiment settings and prompts."
+    },
+    {
+      "name": "KGGEn / KGGen",
+      "source": "https://github.com/stair-lab/kg-gen",
+      "local_note": "Use the official kg-gen repository; do not vendor third-party source code here."
+    },
+    {
+      "name": "EDC",
+      "source": "https://github.com/clear-nus/edc",
+      "local_note": "Use the official EDC repository; project-specific prompt templates are summarized here."
+    }
+  ]
+}

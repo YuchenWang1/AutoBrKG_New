@@ -1,0 +1,43 @@
+@prefix inst: <http://example.org/instance/> .
+@prefix ont: <http://example.org/bridge-defect-ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+inst:桥面铺装 a ont:构件 ;
+    rdfs:label "桥面铺装"@zh ;
+    ont:构件位置是 inst:第3跨 .
+
+inst:1mm a ont:病害性状数值 ;
+    rdfs:label "1mm"@zh .
+
+inst:1条 a ont:病害性状数值 ;
+    rdfs:label "1条"@zh .
+
+inst:3m a ont:病害性状数值 ;
+    rdfs:label "3m"@zh .
+
+inst:宽度 a ont:病害性状描述类别 ;
+    rdfs:label "宽度"@zh ;
+    ont:具有数值 inst:1mm .
+
+inst:数量 a ont:病害性状描述类别 ;
+    rdfs:label "数量"@zh ;
+    ont:具有数值 inst:1条 .
+
+inst:第3跨 a ont:构件编号 ;
+    rdfs:label "第3跨"@zh ;
+    ont:病害具体位置是 <http://example.org/instance/距3_sharp_台处4m,距左侧人行道4m处> .
+
+inst:纵向裂缝 a ont:病害 ;
+    rdfs:label "纵向裂缝"@zh ;
+    ont:具有描述类别 inst:宽度,
+        inst:数量,
+        inst:长度 .
+
+<http://example.org/instance/距3_sharp_台处4m,距左侧人行道4m处> a ont:病害位置 ;
+    rdfs:label "距3#台处4m,距左侧人行道4m处"@zh ;
+    ont:存在病害是 inst:纵向裂缝 .
+
+inst:长度 a ont:病害性状描述类别 ;
+    rdfs:label "长度"@zh ;
+    ont:具有数值 inst:3m .
+

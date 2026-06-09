@@ -1,0 +1,13 @@
+{
+  "onto_list" : [
+    "bridge"
+  ],
+  "path_patterns": {
+    "sys": "../data/bridge/$$onto$$-pre.jsonl",
+    "gt":"../data/bridge/$$onto$$.jsonl",
+    "selected_ids": "../data/bridge/$$onto$$_selected.txt",
+    "onto": "../data/bridge/$$onto$$_ontology.json",
+    "output": "../data/bridge/$$onto$$_output.jsonl"
+  },
+  "avg_out_file": "../data/bridge/ouput.jsonl"
+}
